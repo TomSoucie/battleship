@@ -1,0 +1,17 @@
+Your grid is laid out in a 4x4 grid, rows A-D & columns 1-4
+
+You will place a 2 cell ship and 3 cell ship
+
+Ships cannot wrap around the board
+Ships cannot overlap
+Ships can be laid either horizontally or vertically
+
+Coordinates must correspond to the first and last units of the ship. 
+(IE: You can’t place a two unit ship at “A1 A3”)
+
+Once ships are laid out, you and the enemy will trade shots until the
+last enemy ship is sunk. When you make a shot, a message will display
+indicating a hit or miss, and if you've sunk a ship. 
+
+After each shot the respective player's grid will be shown, until the
+last enemy ship is sank. Now go enjoy the game!
