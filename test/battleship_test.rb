@@ -15,4 +15,9 @@ class BattleshipTest < Minitest::Test
 
     assert intrepid.start_time
   end
+
+  def test_the_welcome_and_instruction_message_prints_upon_opening
+    #manually open the file from the command line
+  end
+
 end

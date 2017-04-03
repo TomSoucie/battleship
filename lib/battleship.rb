@@ -4,6 +4,7 @@ class Battleship
   attr_reader   :start_time
   def initialize
     @start_time = Time.now
+    @game = Game.new
     welcome
   end
 
@@ -14,12 +15,12 @@ class Battleship
 
   def welcome_menu
     user_input = gets.chomp
-    if user_input.downcase == "p" || "play"
+    if user_input.downcase == ("p" || "play")
       game_play
-    elsif user_input.downcase == "i" ||  "instructions"
+    elsif user_input.downcase == ("i" || "instructions")
       puts File.read("./lib/instruction_message.txt")
       welcome
-    elsif user_input.downcase == "q" || "quit"
+    elsif user_input.downcase == ("q" || "quit")
       end_game
     else
       puts "Try again Dave"
