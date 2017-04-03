@@ -29,7 +29,7 @@ class Battleship
   end
 
   def game_play
-
+    computer_ship_placement
   end
 
   def end_game
