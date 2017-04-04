@@ -14,11 +14,19 @@ class GameTest < Minitest::Test
     skip
   end
 
+  def test_the_game_can_take_input
+    skip
+    g = Game.new
+    g.get_input
+
+    # visually assert variety of input
+  end
+
   def test_the_grid_will_print_to_terminal_based_on_input
     #functional test - verify visually via terminal output
 
     g = Game.new
-    g.get_input #Enter variety of cells starting with A1
+    g.get_input
     #visually verify output to screen
   end
 end
