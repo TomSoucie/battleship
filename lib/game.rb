@@ -1,16 +1,26 @@
+require 'pry'
 
 class Game
 
   def initialize
     @player_1_grid = Array.new(4) { Array.new(4)}
-    @player_2_grid = Array.new(4) { Array.new(4)}
+    @player_2_grid = []
     @player_1_shots = Array.new(4) { Array.new(4)}
     @player_2_shots = Array.new(4) { Array.new(4)}
     # @two_s_ship = ""
   end
 
-  def computer_ship_placement
-    @player_2_grid = rand #places x2 and x3 ships
+  def computer_ship_placement(size)
+    #computer randomly selects [A-D][1-4] for 2 coordinates where
+    #with the rules as outlined below
+    row_selector = Random.new
+    col_selector = Random.new
+    until @player_2_grid[0][0] == @player_2_grid[1][0] &&
+      (@player_2_grid[0][1].to_i = @player_2_grid[1][1].to_i
+    2.times do |i|
+      @player_2_grid << [row_selector.rand(65..68).chr, col_selector.rand(1..4)].join
+    end
+    binding.pry
     get_input
   end
 
@@ -18,16 +28,19 @@ class Game
     puts "Enter the coordinates for your first ship, which takes 2 spaces"
     puts "Enter the coordinates seperated by a space - eg 'A1 A2' "
     @two_s_ship = gets.chomp.split(" ")
-    while ((@two_s_ship[0][0] == @two_s_ship[1][0]) && (@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i).abs == 1) ||
-      ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs == 1 && (@two_s_ship[0][1] == @two_s_ship[1][1]))
+    while ((@two_s_ship[0][0] == @two_s_ship[1][0]) && 
+      (@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i).abs == 1) ||
+      ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs == 1 && 
+      (@two_s_ship[0][1] == @two_s_ship[1][1]))
       make_the_grid
     end
-    if (@two_s_ship[0][0] != @two_s_ship[1][0]) && (@two_s_ship[0][1] != @two_s_ship[1][1])
-      "That's diagonal, vertical position only!"
-      # get_input
+    if (@two_s_ship[0][0] != @two_s_ship[1][0]) && 
+      (@two_s_ship[0][1] != @two_s_ship[1][1])
+      puts "That's diagonal, vertical position only!"
+      get_input
     elsif ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs > 1) ||
        ((@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i) > 1)
-      "That's over 2 spaces, try again"
+      puts "That's over 2 spaces, try again"
       get_input
     end
   end
