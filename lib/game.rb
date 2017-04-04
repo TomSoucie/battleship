@@ -3,9 +3,9 @@ class Game
   
   def initialize
     @player_1_grid = Array.new(4) { Array.new(4)}
-    @player_2_grid = Hash.new
-    @player_1_shots = Hash.new
-    @player_2_shots = Hash.new
+    @player_2_grid = Array.new(4) { Array.new(4)}
+    @player_1_shots = Array.new(4) { Array.new(4)}
+    @player_2_shots = Array.new(4) { Array.new(4)}
     @user_input = ""
   end
 
@@ -35,11 +35,13 @@ class Game
 
   def display_the_grid
     # puts @grid.map { |a| a.map { |i| i.to_s.rjust(4)}.join}
+    puts "---------------------------\n" * 2
     format = '%-3s %-6s %-6s %-6s %-6s'
     puts format % [".", "1", "2", "3", "4"]
     @grid.each_with_index do |member, i|
       puts format % [ (i+65).chr, @grid[i][0].to_s, @grid[i][1].to_s, @grid[i][2].to_s, @grid[i][3].to_s]
     end
+    puts "---------------------------\n" * 2
   end
 
 end
