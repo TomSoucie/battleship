@@ -6,7 +6,7 @@ class Game
     @player_2_grid = Array.new(4) { Array.new(4)}
     @player_1_shots = Array.new(4) { Array.new(4)}
     @player_2_shots = Array.new(4) { Array.new(4)}
-    @user_input = ""
+    # @two_s_ship = ""
   end
 
   def computer_ship_placement
@@ -15,9 +15,21 @@ class Game
   end
 
   def get_input
-    puts "Enter input in the row/column format eg; A2 "
-    @user_input = gets.chomp.chars
-    make_the_grid
+    puts "Enter the coordinates for your first ship, which takes 2 spaces"
+    puts "Enter the coordinates seperated by a space - eg 'A1 A2' "
+    @two_s_ship = gets.chomp.split(" ")
+    while ((@two_s_ship[0][0] == @two_s_ship[1][0]) && (@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i).abs == 1) ||
+      ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs == 1 && (@two_s_ship[0][1] == @two_s_ship[1][1]))
+      make_the_grid
+    end
+    if (@two_s_ship[0][0] != @two_s_ship[1][0]) && (@two_s_ship[0][1] != @two_s_ship[1][1])
+      "That's diagonal, vertical position only!"
+      # get_input
+    elsif ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs > 1) ||
+       ((@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i) > 1)
+      "That's over 2 spaces, try again"
+      get_input
+    end
   end
 
   def make_the_grid

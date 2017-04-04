@@ -21,13 +21,14 @@ class GameTest < Minitest::Test
     # visually assert variety of input
   end
 
-  def test_the_game_will_validate_user_input
+  def test_the_game_will_detect_a_diagonal_error
     g = Game.new
-    #manually enter an invalid 2space ship
-    assert_equal "That's not a valid position, try again", g.get_input
+    #manually enter diagonally invalid coordinates for a 2space ship
+    assert_equal "That's diagonal, vertical position only!", g.get_input
   end
 
   def test_the_grid_will_print_to_terminal_based_on_input
+    skip
     #functional test - verify visually via terminal output
 
     g = Game.new
