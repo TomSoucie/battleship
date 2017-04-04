@@ -18,8 +18,13 @@ class GameTest < Minitest::Test
     skip
     g = Game.new
     g.get_input
-
     # visually assert variety of input
+  end
+
+  def test_the_game_will_validate_user_input
+    g = Game.new
+    #manually enter an invalid 2space ship
+    assert_equal "That's not a valid position, try again", g.get_input
   end
 
   def test_the_grid_will_print_to_terminal_based_on_input
