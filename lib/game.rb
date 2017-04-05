@@ -18,6 +18,7 @@ class Game
     2.times do
       @player_2_grid << [@row_selector.rand(65..68).chr, @col_selector.rand(1..4)].join
     end
+    # binding.pry
     input_validator(@player_2_grid)
   end
 
@@ -78,6 +79,7 @@ class Game
       (@user_input[0][1].to_i - @user_input[1][1].to_i).abs == 1) ||
       ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs == 1 && 
       (@user_input[0][1] == @user_input[1][1]))
+      binding.pry
       make_the_grid 
     elsif (@user_input[0][0] != @user_input[1][0]) && 
       (@user_input[0][1] != @user_input[1][1])
@@ -91,14 +93,16 @@ class Game
   end
 
   def make_the_grid
-    if @user_input[0] == "A"
-      @player_1_grid[0][(@user_input[1].to_i)-1] = "X"
-    elsif @user_input[0] == "B"
-      @player_1_grid[1][(@user_input[1].to_i)-1] = "X"
-    elsif @user_input[0] == "C"
-      @player_1_grid[2][(@user_input[1].to_i)-1] = "X"
-    elsif @user_input[0] == "D"
-      @player_1_grid[3][(@user_input[1].to_i)-1] = "X"
+    @user_input.each do |coord|
+      if coord[0] == "A"
+        @player_1_grid[0][(coord[1].to_i)-1] = "X"
+      elsif coord[0] == "B"
+        @player_1_grid[1][(coord[1].to_i)-1] = "X"
+      elsif coord[0] == "C"
+        @player_1_grid[2][(coord[1].to_i)-1] = "X"
+      elsif coord[0] == "D"
+        @player_1_grid[3][(coord[1].to_i)-1] = "X"
+      end 
     end     
     display_the_grid
   end
