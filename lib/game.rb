@@ -17,11 +17,11 @@ class Game
   def computer_selects_2ship_coordinates
     2.times do
       @player_2_grid << [@row_selector.rand(65..68).chr, @col_selector.rand(1..4)].join
-    end 
+    end
     input_validator(@player_2_grid)
   end
 
-  def input_validator(input = @player_2_grid)
+  def input_validator(input)
     if ((input[0][0] == input[1][0]) && 
       (input[0][1].to_i - input[1][1].to_i).abs == 1) ||
       ((input[0][0].unpack('c')[0] - input[1][0].unpack('c')[0]).abs == 1 && 
@@ -74,13 +74,12 @@ class Game
     puts "Enter the coordinates for your first ship, which takes 2 spaces"
     puts "Enter the coordinates seperated by a space - eg 'A1 A2' "
     @user_input = gets.chomp.split(" ")
-    while ((@user_input[0][0] == @user_input[1][0]) && 
+    if ((@user_input[0][0] == @user_input[1][0]) && 
       (@user_input[0][1].to_i - @user_input[1][1].to_i).abs == 1) ||
       ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs == 1 && 
       (@user_input[0][1] == @user_input[1][1]))
-    end
-      make_the_grid
-    if (@user_input[0][0] != @user_input[1][0]) && 
+      make_the_grid 
+    elsif (@user_input[0][0] != @user_input[1][0]) && 
       (@user_input[0][1] != @user_input[1][1])
       puts "That's diagonal, vertical position only!"
       get_input
