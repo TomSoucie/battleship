@@ -7,39 +7,84 @@ class Game
     @player_2_grid = []
     @player_1_shots = Array.new(4) { Array.new(4)}
     @player_2_shots = Array.new(4) { Array.new(4)}
-    # @two_s_ship = ""
+    @row_selector = Random.new
+    @col_selector = Random.new
+    @two_s_ship = ""
   end
 
-  def computer_ship_placement(size)
-    #computer randomly selects [A-D][1-4] for 2 coordinates where
-    #with the rules as outlined below
-    row_selector = Random.new
-    col_selector = Random.new
-    until @player_2_grid[0][0] == @player_2_grid[1][0] &&
-      (@player_2_grid[0][1].to_i = @player_2_grid[1][1].to_i
-    2.times do |i|
-      @player_2_grid << [row_selector.rand(65..68).chr, col_selector.rand(1..4)].join
+  
+  
+  def computer_selects_2ship_coordinates
+    2.times do
+      @player_2_grid << [@row_selector.rand(65..68).chr, @col_selector.rand(1..4)].join
     end
-    binding.pry
-    get_input
+    input_validator(@player_2_grid)
   end
+
+  def input_validator(input)
+    if ((input[0][0] == input[1][0]) && 
+      (input[0][1].to_i - input[1][1].to_i).abs == 1) ||
+      ((input[0][0].unpack('c')[0] - input[1][0].unpack('c')[0]).abs == 1 && 
+      (input[0][1] == input[1][1]))
+      get_input
+    else
+      computer_selects_2ship_coordinates
+    end
+  end
+
+  # def computer_ship_coordinate_selection(size)
+  #   unless ((@player_2_grid[0][0] == @player_2_grid[1][0]) && 
+  #     (@player_2_grid[0][1].to_i - @player_2_grid[1][1].to_i).abs == 1) ||
+  #     ((@player_2_grid[0][0].unpack('c')[0] - @player_2_grid[1][0].unpack('c')[0]).abs == 1 && 
+  #     (@player_2_grid[0][1] == @player_2_grid[1][1]))
+  #   begin
+  #   2.times do |i|
+  #     @player_2_grid << [@row_selector.rand(65..68).chr, @col_selector.rand(1..4)].join
+  #   end until ((@player_2_grid[0][0] == @player_2_grid[1][0]) && 
+  #     (@player_2_grid[0][1].to_i - @player_2_grid[1][1].to_i).abs == 1) ||
+  #     ((@player_2_grid[0][0].unpack('c')[0] - @player_2_grid[1][0].unpack('c')[0]).abs == 1 && 
+  #     (@player_2_grid[0][1] == @player_2_grid[1][1]))
+  #   end  
+    # return @player_2_grid if ((@player_2_grid[0][0] == @player_2_grid[1][0]) && 
+    #   (@player_2_grid[0][1].to_i - @player_2_grid[1][1].to_i).abs == 1) ||
+    #   ((@player_2_grid[0][0].unpack('c')[0] - @player_2_grid[1][0].unpack('c')[0]).abs == 1 && 
+    #   (@player_2_grid[0][1] == @player_2_grid[1][1]))
+    # else
+    # computer_ship_coordinate_selection(size)
+    # @player_2_grid
+    # binding.pry
+    
+#   end
+  
+#   def computer_ship_placement(size)
+#     #computer randomly selects [A-D][1-4] for 2 coordinates
+#     #with the rules as outlined below
+#     row_selector = Random.new
+#     col_selector = Random.new
+#     # until @player_2_grid[0][0] == @player_2_grid[1][0] &&
+#     #       (@player_2_grid[0][1].to_i - @player_2_grid[1][1].to_i).abs == 1
+#       2.times do |i|
+#         @player_2_grid << [row_selector.rand(65..68).chr, col_selector.rand(1..4)].join
+#       end  
+#     # binding.pry
+#     # get_input
+#   end
 
   def get_input
     puts "Enter the coordinates for your first ship, which takes 2 spaces"
     puts "Enter the coordinates seperated by a space - eg 'A1 A2' "
-    @two_s_ship = gets.chomp.split(" ")
-    while ((@two_s_ship[0][0] == @two_s_ship[1][0]) && 
-      (@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i).abs == 1) ||
-      ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs == 1 && 
-      (@two_s_ship[0][1] == @two_s_ship[1][1]))
-      make_the_grid
-    end
-    if (@two_s_ship[0][0] != @two_s_ship[1][0]) && 
-      (@two_s_ship[0][1] != @two_s_ship[1][1])
+    @user_input = gets.chomp.split(" ")
+    if ((@user_input[0][0] == @user_input[1][0]) && 
+      (@user_input[0][1].to_i - @user_input[1][1].to_i).abs == 1) ||
+      ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs == 1 && 
+      (@user_input[0][1] == @user_input[1][1]))
+      make_the_grid 
+    elsif (@user_input[0][0] != @user_input[1][0]) && 
+      (@user_input[0][1] != @user_input[1][1])
       puts "That's diagonal, vertical position only!"
       get_input
-    elsif ((@two_s_ship[0][0].unpack('c')[0] - @two_s_ship[1][0].unpack('c')[0]).abs > 1) ||
-       ((@two_s_ship[0][1].to_i - @two_s_ship[1][1].to_i) > 1)
+    elsif ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs > 1) ||
+       ((@user_input[0][1].to_i - @user_input[1][1].to_i) > 1)
       puts "That's over 2 spaces, try again"
       get_input
     end
@@ -67,5 +112,4 @@ class Game
     end
     puts "---------------------------\n" * 2
   end
-
 end

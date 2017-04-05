@@ -4,7 +4,6 @@ class Battleship
   attr_reader   :start_time
   def initialize
     @start_time = Time.now
-    @game = Game.new
     welcome
   end
 
@@ -23,17 +22,18 @@ class Battleship
     elsif user_input.downcase == ("q" || "quit")
       end_game
     else
-      puts "Try again Dave"
+      puts "Try again"
       welcome
     end
   end
 
   def game_play
-    computer_ship_placement
+    g = Game.new
+    g.computer_selects_2ship_coordinates
   end
 
   def end_game
-
+    puts "Thanks for playing!"
   end
 
 end
