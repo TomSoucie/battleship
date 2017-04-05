@@ -26,6 +26,11 @@ class GameTest < Minitest::Test
     assert (first_letter == second_letter || first_number == second_number)
   end
 
+  def test_input_is_validated
+    g = Game.new
+    result = g.computer_selects_2ship_coordinates
+
+  end
   def test_the_computer_can_randomly_select_a_ship
     skip
     g = Game.new
