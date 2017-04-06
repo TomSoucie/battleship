@@ -28,7 +28,8 @@ class GameTest < Minitest::Test
 
   def test_input_is_validated
     g = Game.new
-    result = g.computer_selects_2ship_coordinates
+    
+    
 
   end
   def test_the_computer_can_randomly_select_a_ship
