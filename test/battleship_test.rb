@@ -17,7 +17,8 @@ class BattleshipTest < Minitest::Test
   end
 
   def test_the_welcome_and_instruction_message_prints_upon_opening
-    #manually open the file from the command line
+    # manually open the file from the command line
+    # verify different menu options of (i) & (q) with (p) initiating the game pla
   end
 
 end
