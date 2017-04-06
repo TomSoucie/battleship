@@ -40,13 +40,12 @@ class Game
       (@user_input[0][1].to_i - @user_input[1][1].to_i).abs == 1) ||
       ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs == 1 && 
       (@user_input[0][1] == @user_input[1][1]))
-      # binding.pry
       make_the_grid(@user_input)
     else   
-      if (@user_input[0][0] != @user_input[1][0]) && (@user_input[0][1] != @user_input[1][1])
+      if (@user_input[0][0] != @user_input[1][0])&& (@user_input[0][1] != @user_input[1][1])
         puts "That's diagonal, vertical position only is allowed. Try again!"
       elsif ((@user_input[0][0].unpack('c')[0] - @user_input[1][0].unpack('c')[0]).abs > 1) ||
-         ((@user_input[0][1].to_i - @user_input[1][1].to_i) > 1)
+        ((@user_input[0][1].to_i - @user_input[1][1].to_i) > 1)
         puts "That's over 2 spaces, try again"
       end
       get_input
